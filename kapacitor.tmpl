@@ -1,0 +1,25 @@
+data_dir = "/var/lib/kapacitor"
+
+[http]
+  bind-address = ":9092"
+  auth-enabled = false
+  log-enabled = true
+  write-tracing = false
+  pprof-enabled = false
+  https-enabled = false
+
+[[influxdb]]
+  enabled = true
+  default = true
+  name = ""
+  urls = ["http://{{ .Env.INFLUXDB_HOST }}:8086"]
+  username = "{{ .Env.INFLUXDB_USER }}"
+  password = "{{ .Env.INFLUXDB_PASSWORD }}"
+  timeout = 0
+
+  startup-timeout = "5m"
+  disable-subscriptions = false
+  subscription-protocol = "http"
+
+[influxdb.subscriptions]
+  {{ .Env.INFLUXDB_SUBSCRIPTION_DB }} = ["{{ .Env.INFLUXDB_SUBSCRIPTION_DB_RP }}"]
