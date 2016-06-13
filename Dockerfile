@@ -1,17 +1,5 @@
 FROM alpine:3.4
 
-EXPOSE 9092
-VOLUME /var/lib/kapacitor
-
-ENV KAPACITOR_HOSTNAME kapacitor
-
-ENV INFLUXDB_HOST influxdb
-ENV INFLUXDB_USER metrics
-ENV INFLUXDB_PASSWORD metrics
-
-ENV INFLUXDB_SUBSCRIPTION_DB metrics
-ENV INFLUXDB_SUBSCRIPTION_DB_RP default
-
 RUN apk add --no-cache --virtual .build-deps wget gnupg tar ca-certificates && \
     update-ca-certificates && \
     gpg --keyserver hkp://ha.pool.sks-keyservers.net \
@@ -36,6 +24,23 @@ RUN \
 
 RUN mkdir -p /etc/kapacitor
 COPY kapacitor.tmpl /etc/kapacitor
+
+EXPOSE 9092
+VOLUME /var/lib/kapacitor
+
+ENV KAPACITOR_HOSTNAME kapacitor
+
+ENV INFLUXDB_HOST influxdb
+ENV INFLUXDB_USER metrics
+ENV INFLUXDB_PASSWORD metrics
+
+ENV INFLUXDB_SUBSCRIPTION_DB metrics
+ENV INFLUXDB_SUBSCRIPTION_DB_RP default
+
+ENV ALERTA_ENABLED true
+ENV ALERTA_API_URL http://alerta-api:8000
+ENV ALERTA_ENVIRONMENT development
+ENV ALERTA_TOKEN ""
 
 CMD dockerize \
     -template /etc/kapacitor/kapacitor.tmpl:/etc/kapacitor/kapacitor.conf \

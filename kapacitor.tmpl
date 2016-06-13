@@ -23,3 +23,10 @@ data_dir = "/var/lib/kapacitor"
 
 [influxdb.subscriptions]
   {{ .Env.INFLUXDB_SUBSCRIPTION_DB }} = ["{{ .Env.INFLUXDB_SUBSCRIPTION_DB_RP }}"]
+
+[alerta]
+  enabled = {{ .Env.ALERTA_ENABLED }}
+  url = "{{ .Env.ALERTA_API_URL }}"
+  token = "{{ .Env.ALERTA_TOKEN }}"
+  environment = "{{ .Env.ALERTA_ENVIRONMENT }}"
+  origin = "kapacitor"
