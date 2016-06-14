@@ -1,5 +1,16 @@
 data_dir = "/var/lib/kapacitor"
 
+[storage]
+  boltdb = "/var/lib/kapacitor/kapacitor.db"
+
+[logging]
+  # Destination for logs
+  # Can be a path to a file or 'STDOUT', 'STDERR'.
+  file = "STDOUT"
+  # Logging level can be one of:
+  # DEBUG, INFO, WARN, ERROR, or OFF
+  level = "WARN"
+
 [http]
   bind-address = ":9092"
   auth-enabled = false
