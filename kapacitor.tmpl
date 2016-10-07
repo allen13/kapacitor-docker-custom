@@ -31,10 +31,10 @@ data_dir = "/var/lib/kapacitor"
   startup-timeout = "5m"
   disable-subscriptions = false
   subscription-protocol = "http"
-
+{{ if eq "true" .Env.INFLUXDB_SUBSCRIPTION_ENABLED }}
 [influxdb.subscriptions]
   {{ .Env.INFLUXDB_SUBSCRIPTION_DB }} = ["{{ .Env.INFLUXDB_SUBSCRIPTION_DB_RP }}"]
-
+{{ end }}
 [alerta]
   enabled = {{ .Env.ALERTA_ENABLED }}
   url = "{{ .Env.ALERTA_API_URL }}"
