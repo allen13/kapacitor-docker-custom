@@ -40,6 +40,6 @@ data_dir = "/var/lib/kapacitor"
 [alerta]
   enabled = {{ .Env.ALERTA_ENABLED }}
   url = "{{ .Env.ALERTA_API_URL }}"
-  tls_skip_verify = true
+  insecure-skip-verify = true
   token = "{{ .Env.ALERTA_TOKEN }}"
   origin = "kapacitor"
