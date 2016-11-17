@@ -22,7 +22,7 @@ data_dir = "/var/lib/kapacitor"
 [[influxdb]]
   enabled = true
   default = true
-  name = ""
+  name = "influxdb"
   urls = ["http://{{ .Env.INFLUXDB_HOST }}:8086"]
   username = "{{ .Env.INFLUXDB_USER }}"
   password = "{{ .Env.INFLUXDB_PASSWORD }}"
@@ -40,5 +40,6 @@ data_dir = "/var/lib/kapacitor"
 [alerta]
   enabled = {{ .Env.ALERTA_ENABLED }}
   url = "{{ .Env.ALERTA_API_URL }}"
+  tls_skip_verify = true
   token = "{{ .Env.ALERTA_TOKEN }}"
   origin = "kapacitor"
