@@ -1,6 +1,6 @@
 FROM alpine:3.4
 
-ENV KAPACITOR_VERSION 1.1.1
+ENV KAPACITOR_VERSION 1.1.1.1
 RUN apk add --no-cache --virtual .build-deps wget gnupg tar ca-certificates && \
     update-ca-certificates && \
     wget -q https://github.com/allen13/kapacitor-docker-custom/releases/download/v1.1.1/kapacitor-${KAPACITOR_VERSION}-static_linux_amd64.tar.gz && \
