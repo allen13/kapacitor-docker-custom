@@ -1,9 +1,9 @@
-FROM alpine:3.4
+FROM alpine:edge
 
-ENV KAPACITOR_VERSION 1.1.1.3
+ENV KAPACITOR_VERSION 1.2.0
 RUN apk add --no-cache --virtual .build-deps wget gnupg tar ca-certificates && \
     update-ca-certificates && \
-    wget -q https://github.com/allen13/kapacitor-docker-custom/releases/download/v1.1.1/kapacitor-${KAPACITOR_VERSION}-static_linux_amd64.tar.gz && \
+    wget -q https://github.com/allen13/kapacitor-docker-custom/releases/download/v1.2.0/kapacitor-${KAPACITOR_VERSION}-static_linux_amd64.tar.gz && \
     mkdir -p /usr/src && \
     tar -C /usr/src -xzf kapacitor-${KAPACITOR_VERSION}-static_linux_amd64.tar.gz && \
     rm -f /usr/src/kapacitor-*/kapacitor.conf && \
@@ -38,6 +38,7 @@ ENV INFLUXDB_SUBSCRIPTION_DB_RP default
 ENV ALERTA_ENABLED true
 ENV ALERTA_API_URL https://golerta:5608
 ENV ALERTA_TOKEN ""
+ENV ALERTA_TOKEN_PREFIX Bearer
 
 CMD dockerize \
     -template /etc/kapacitor/kapacitor.tmpl:/etc/kapacitor/kapacitor.conf \
